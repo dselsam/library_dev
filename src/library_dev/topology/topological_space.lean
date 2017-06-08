@@ -5,7 +5,7 @@ Authors: Johannes Hölzl
 
 Theory of topological spaces.
 -/
-import algebra.lattice.filter
+import ..algebra.lattice.filter
 open set filter lattice
 
 universes u v w

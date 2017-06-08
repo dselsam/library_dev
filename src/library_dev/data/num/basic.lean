@@ -11,7 +11,7 @@ in favor of the "Peano" natural numbers `nat`, and the purpose of this
 collection of theorems is to show the equivalence of the different approaches.
 -/
 
-import data.pnat data.bool data.vector data.bitvec
+import data.pnat ...data.bool data.vector data.bitvec
 
 universe u
 
@@ -389,7 +389,7 @@ namespace snum
   | tt tt p := p
 
   def cadd : snum → snum → bool → snum :=
-  rec' (λ a p c, czadd c a p) $ λa p IH, 
+  rec' (λ a p c, czadd c a p) $ λa p IH,
   rec' (λb c, czadd c b (a :: p)) $ λb q _ c,
   bitvec.xor3 a b c :: IH q (bitvec.carry a b c)
 

@@ -1,4 +1,4 @@
-import algebra.ring
+import ...algebra.ring
 import init.data.nat.basic
 namespace nat
 

@@ -5,12 +5,12 @@ Authors Jeremy Avigad, Leonardo de Moura, Johannes Hölzl
 
 -- QUESTION: can make the first argument in ∀ x ∈ a, ... implicit?
 -/
-import logic.basic data.set  -- from the library in the main repo
-import algebra.lattice algebra.lattice.complete_boolean_algebra
-import tools.auto.finish
+import ...logic.basic data.set  -- from the library in the main repo
+import ...algebra.lattice ...algebra.lattice.complete_boolean_algebra
+import ...tools.auto.finish
 
 open function tactic set lattice auto
- 
+
 universes u v w x
 variables {α : Type u} {β : Type v} {γ : Type w} {ι : Sort x}
 
@@ -52,7 +52,7 @@ instance lattice_set : complete_lattice (set α) :=
   le_sup_left  := subset_union_left,
   le_sup_right := subset_union_right,
   sup_le       := take a b c, union_subset,
-  
+
   inf          := (∩),
   inf_le_left  := inter_subset_left,
   inf_le_right := inter_subset_right,
@@ -343,7 +343,7 @@ theorem singleton_ne_empty (a : α) : ({a} : set α) ≠ ∅ := insert_ne_empty 
 
 @[simp]
 lemma singleton_subset_iff {a : α} {s : set α} : {a} ⊆ s ↔ a ∈ s :=
-⟨λh, h (by simp), λh b e, by simp at e; simph⟩ 
+⟨λh, h (by simp), λh b e, by simp at e; simph⟩
 
 /- separation -/
 
@@ -571,7 +571,7 @@ notation `⋂` binders `, ` r:(scoped f, Inter f) := r
 @[simp]
 theorem mem_Union_eq (x : β) (s : ι → set β) : (x ∈ ⋃ i, s i) = (∃ i, x ∈ s i) :=
 propext
-  ⟨take ⟨t, ⟨⟨a, (t_eq : t = s a)⟩, (h : x ∈ t)⟩⟩, ⟨a, t_eq ▸ h⟩, 
+  ⟨take ⟨t, ⟨⟨a, (t_eq : t = s a)⟩, (h : x ∈ t)⟩⟩, ⟨a, t_eq ▸ h⟩,
   take ⟨a, h⟩, ⟨s a, ⟨⟨a, rfl⟩, h⟩⟩⟩
 /- alternative proof: dsimp [Union, supr, Sup]; simp -/
   -- TODO: more rewrite rules wrt forall / existentials and logical connectives
@@ -650,7 +650,7 @@ show u x ≤ (⨆ x ∈ s, u x),
 
 theorem bInter_subset_of_mem {s : set α} {t : α → set β} {x : α} (xs : x ∈ s) :
   (⋂ x ∈ s, t x) ⊆ t x :=
-show (⨅x ∈ s, t x) ≤ t x, 
+show (⨅x ∈ s, t x) ≤ t x,
   from infi_le_of_le x $ infi_le _ xs
 
 @[simp]
@@ -827,7 +827,7 @@ instance : complete_boolean_algebra (set α) :=
   sup_neg_eq_top      := take s, ext $ take x, ⟨take h, trivial, take _, classical.em $ x ∈ s⟩,
   le_sup_inf          := distrib_lattice.le_sup_inf,
   sub_eq              := take x y, rfl,
-  infi_sup_le_sup_Inf := take s t x, show x ∈ (⋂ b ∈ t, s ∪ b) → x ∈ s ∪ (⋂₀ t), 
+  infi_sup_le_sup_Inf := take s t x, show x ∈ (⋂ b ∈ t, s ∪ b) → x ∈ s ∪ (⋂₀ t),
     by simp; exact take h,
       or.imp_right
         (assume hn : x ∉ s, take i hi, or.resolve_left (h i hi) hn)
@@ -843,7 +843,7 @@ sup_neg_eq_top
 
 @[simp]
 lemma sdiff_singleton_eq_same {a : α} {s : set α} (h : a ∉ s) : s \ {a} = s :=
-sub_eq_left $ eq_empty_of_forall_not_mem $ take x ⟨ht, ha⟩, 
+sub_eq_left $ eq_empty_of_forall_not_mem $ take x ⟨ht, ha⟩,
   begin simp at ha, simp [ha] at ht, exact h ht end
 
 @[simp]

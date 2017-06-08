@@ -5,7 +5,7 @@ Authors: Parikshit Khanna, Jeremy Avigad, Leonardo de Moura, Floris van Doorn
 
 Basic properties of lists.
 -/
-import logic.basic ..nat.basic
+import library_dev.logic.basic ..nat.basic
 open function nat
 
 namespace list

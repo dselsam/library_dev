@@ -1,4 +1,4 @@
-import algebra.ring
+import ...algebra.ring
 
 namespace int
 
